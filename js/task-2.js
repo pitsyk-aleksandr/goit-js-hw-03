@@ -1,31 +1,47 @@
-// Задача 2. Форматування повідомлення
+// Задача 2. Композиція масивів
 
 /* --------------------------------------------------------------------------------------------- */
-// Функція formatMessage(message, maxLength)
+// Напиши функцію під назвою makeArray,
+// яка приймає три параметри: firstArray (масив), secondArray (масив) і maxLength (число).
 /* --------------------------------------------------------------------------------------------- */
-// приймає рядок (параметр message) та перевіряє його довжину відповідно
-// до заданої максимальної довжини (параметр maxLength).
+// Функція повинна створювати новий масив, який містить усі елементи з firstArray,
+// а потім усі елементи з secondArray.
+
+// Якщо кількість елементів у новому масиві перевищує maxLength,
+// функція повинна повернути копію масиву з довжиною maxLength елементів.
+
+// В іншому випадку функція повинна повернути весь новий масив.
 /* --------------------------------------------------------------------------------------------- */
 
-
-function formatMessage(message, maxLength) {
-  // Знаходимо довжину рядка
-  const messageLenght = message.length;
-  //  console.log('messageLenght -', messageLenght, maxLength);
-  if (messageLenght <= maxLength) {
-    // Якщо довжина рядка дорівнює або менша за maxLength, то функція повертає початковий рядок без змін.
-    return message.slice();
-  } else {
-    // Якщо довжина перевищує maxLength, то функція обрізає рядок до maxLength символів,
-    // додає трикрапку "..." в кінці та повертає обрізану версію.
-    return message.slice(0, maxLength) + '...';
+function makeArray(firstArray, secondArray, maxLength) {
+  const allArray = firstArray.concat(secondArray);
+  //   console.log(allArray);
+  let lenArray = [];
+  if (maxLength > 0) {
+    lenArray = allArray.slice(0, maxLength);
   }
+  return lenArray;
 }
-
 /* --------------------------------------------------------------------------------------------- */
-console.log(formatMessage('Curabitur ligula sapien', 16)); // "Curabitur ligula..."
-console.log(formatMessage('Curabitur ligula sapien', 23)); // "Curabitur ligula sapien"
-console.log(formatMessage('Vestibulum facilisis purus nec', 20)); // "Vestibulum facilisis..."
-console.log(formatMessage('Vestibulum facilisis purus nec', 30)); // "Vestibulum facilisis purus nec"
-console.log(formatMessage('Nunc sed turpis a felis in nunc fringilla', 15)); // "Nunc sed turpis..."
-console.log(formatMessage('Nunc sed turpis a felis in nunc fringilla', 41)); // "Nunc sed turpis a felis in nunc fringilla"
+
+/* ============================================================================================= */
+// Перевірка
+/* ============================================================================================= */
+console.log(makeArray(['Mango', 'Poly'], ['Ajax', 'Chelsea'], 3));
+// ["Mango", "Poly", "Ajax"]
+
+console.log(makeArray(['Mango', 'Poly', 'Houston'], ['Ajax', 'Chelsea'], 4));
+// ["Mango", "Poly", "Houston", "Ajax"]
+
+console.log(makeArray(['Mango'], ['Ajax', 'Chelsea', 'Poly', 'Houston'], 3));
+// ["Mango", "Ajax", "Chelsea"]
+
+console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus'], 2));
+// ["Earth", "Jupiter"]
+
+console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus'], 4));
+// ["Earth", "Jupiter", "Neptune", "Uranus"]
+
+console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus', 'Venus'], 0)); // []
+
+/* ============================================================================================= */
